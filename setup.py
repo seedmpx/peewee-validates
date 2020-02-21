@@ -1,47 +1,27 @@
-from setuptools import setup
-from codecs import open
-from os import path
+import os
+from setuptools import setup, find_packages
 
-from peewee_validates import __version__
-
-root_dir = path.abspath(path.dirname(__file__))
-
-with open(path.join(root_dir, 'README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
-
-with open(path.join(root_dir, 'requirements.txt'), encoding='utf-8') as f:
-    install_requires = list(map(str.strip, f.readlines()))
+f = open(os.path.join(os.path.dirname(__file__), 'README.rst'))
+readme = f.read()
+f.close()
 
 setup(
-    name='peewee-validates',
-    version=__version__,
-
-    description='Simple and flexible model validator for Peewee ORM.',
-    long_description=long_description,
-
-    url='https://github.com/timster/peewee-validates',
-
-    author='Tim Shaffer',
-    author_email='timshaffer@me.com',
-
-    license='MIT',
-
+    name='peewee',
+    version="0.9.7",
+    description='a little orm',
+    long_description=readme,
+    author='Charles Leifer',
+    author_email='coleifer@gmail.com',
+    url='http://github.com/coleifer/peewee/',
+    py_modules=['peewee', 'pwiz'],
     classifiers=[
-        'Development Status :: 3 - Alpha',
-
+        'Development Status :: 4 - Beta',
+        'Environment :: Web Environment',
         'Intended Audience :: Developers',
-        'Topic :: Database :: Front-Ends',
-
         'License :: OSI Approved :: MIT License',
-
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
     ],
-
-    keywords='peewee orm database form validation development',
-
-    py_modules=['peewee_validates'],
-
-    install_requires=install_requires,
+    test_suite='runtests.collect',
+    scripts = ['pwiz.py'],
 )
